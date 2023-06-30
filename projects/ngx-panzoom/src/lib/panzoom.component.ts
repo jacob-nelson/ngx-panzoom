@@ -199,7 +199,7 @@ export class PanZoomComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (this.config.dynamicContentDimensions) {
       if ((window as any).ResizeObserver) {
-        this.resizeObserver = new (window as any).ResizeObserver( entries => this.onContentDimensionsChangeDetected(entries) );
+        this.resizeObserver = new (window as any).ResizeObserver( (entries: any) => this.onContentDimensionsChangeDetected(entries) );
         this.zone.runOutsideAngular( () => this.resizeObserver.observe(this.zoomElementRef.nativeElement) );
       }
       else {
@@ -215,7 +215,7 @@ export class PanZoomComponent implements OnInit, AfterViewInit, OnDestroy {
       this.zone.runOutsideAngular( () => {
         this.frameElementRef.nativeElement.addEventListener('mousedown', this.onMousedown);
         this.frameElementRef.nativeElement.addEventListener('dblclick', this.onDblClick );
-        this.frameElementRef.nativeElement.addEventListener('wheel', (event) => this.animationFrameFunc( () => this.onMouseWheel(event) ), { passive: true } );
+        this.frameElementRef.nativeElement.addEventListener('wheel', (event: any) => this.animationFrameFunc( () => this.onMouseWheel(event) ), { passive: true } );
       } );
     }
 
@@ -230,7 +230,7 @@ export class PanZoomComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     else {
       this.frameElementRef.nativeElement.removeEventListener('mousedown', this.onMousedown);
-      this.frameElementRef.nativeElement.removeEventListener('wheel', (event) => this.animationFrameFunc( () => this.onMouseWheel(event) ), { passive: true } );
+      this.frameElementRef.nativeElement.removeEventListener('wheel', (event: any) => this.animationFrameFunc( () => this.onMouseWheel(event) ), { passive: true } );
       this.frameElementRef.nativeElement.removeEventListener('dblclick', this.onDblClick);
     }
     if (this.animationFrameFunc && this.animationId) {
@@ -318,7 +318,7 @@ export class PanZoomComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param className
    * @param child
    */
-  private isParentElement(className, child) {
+  private isParentElement(className: any, child: any) {
     let node = child.parentNode;
     while (node !== null) {
       if (node.classList && node.classList.contains(className)) {
@@ -548,7 +548,7 @@ export class PanZoomComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
 
-  private onMouseUp = (event) => {
+  private onMouseUp = (event: any) => {
     // console.log('PanZoomComponent: onMouseup()', event);
 
     if ((event.button !== this.dragMouseButton) && (event.type !== 'touchend')) {
@@ -1379,7 +1379,7 @@ export class PanZoomComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
 
-  private animateToTarget(targetModel: PanZoomModel, duration = undefined) {
+  private animateToTarget(targetModel: PanZoomModel, duration: any = undefined) {
     // console.log('PanZoomComponent: animateToTarget()');
     // what this function really does is take a target model, and then sets
     // this.animationParams with the parameters for the whole animation,
